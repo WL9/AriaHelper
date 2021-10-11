@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.k.ariahelper.R
 import com.k.ariahelper.models.DiceModel
-import com.k.ariahelper.models.Dices
 
 class DicesFragment : Fragment(), DiceClickListener {
     private val availableDices: ArrayList<DiceModel> = arrayListOf(
@@ -50,12 +49,11 @@ class DicesFragment : Fragment(), DiceClickListener {
     }
 
     override fun onDiceClickListener(diceModel: DiceModel) {
-        val dice = Dices(diceModel.value)
-        val rollDices = dice.rollDices()
-        val resultText: String = dice.getDiceNumber().toString() + rollDices.toString()
+        val dicesResult = diceModel.roll(1)
+        val resultText: String = dicesResult.toString()
 
         diceTypeDisplay.text = diceModel.label
         resultDetailsDisplay.text = resultText
-        resultDisplay.text = rollDices.sum().toString()
+        resultDisplay.text = dicesResult.sum().toString()
     }
 }
