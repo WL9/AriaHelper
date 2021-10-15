@@ -10,40 +10,90 @@
         android:id="@+id/resultDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="40dp"
-        android:text="92"
-        android:textSize="36sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.56"
+        android:text="@string/initialDiceResult"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/diceTypeDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/resultDisplay"
+        android:layout_marginEnd="24dp"
         app:layout_constraintTop_toTopOf="@+id/resultDisplay" />
 
     <TextView
         android:id="@+id/resultDetailsDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/resultDisplay"
         app:layout_constraintEnd_toEndOf="@+id/diceTypeDisplay" />
+
+    <TextView
+        android:id="@+id/numberOfDicesInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/resultDetailsDisplay"
+        app:layout_constraintTop_toTopOf="@+id/numberOfDices"
+        android:text="@string/diceNumber" />
+
+    <Button
+        android:id="@+id/numberOfDicesDecrease"
+        style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="-10dp"
+        android:layout_marginBottom="-10dp"
+        android:text="@string/minus"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/numberOfDices"
+        app:layout_constraintEnd_toStartOf="@+id/numberOfDices"
+        app:layout_constraintTop_toTopOf="@+id/numberOfDices" />
+
+    <Button
+        android:id="@+id/numberOfDicesIncrease"
+        style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="-10dp"
+        android:layout_marginBottom="-10dp"
+        android:text="@string/plus"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/numberOfDices"
+        app:layout_constraintStart_toEndOf="@+id/numberOfDices"
+        app:layout_constraintTop_toTopOf="@+id/numberOfDices" />
+
+
+    <TextView
+        android:id="@+id/numberOfDices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/resultDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/resultDisplay" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/diceRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultDisplay" />
+        app:layout_constraintTop_toBottomOf="@+id/numberOfDices"
+        app:layout_constraintVertical_bias="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

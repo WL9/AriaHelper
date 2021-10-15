@@ -3,4 +3,8 @@
     <string name="dicesMenu">Dés</string>
     <string name="cardsMenu">Cartes</string>
     <string name="characterMenu">Personnage</string>
+    <string name="initialDiceResult">92</string>
+    <string name="diceNumber">Nombre de dés :</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
 </resources>
