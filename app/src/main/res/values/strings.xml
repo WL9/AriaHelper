@@ -3,4 +3,10 @@
     <string name="dicesMenu">Dés</string>
     <string name="cardsMenu">Cartes</string>
     <string name="characterMenu">Personnage</string>
+    <string name="cardsColorHearts">Coeur</string>
+    <string name="cardsColorSpades">Pique</string>
+    <string name="cardsColorDiamonds">Carreau</string>
+    <string name="cardsColorClubs">trèfle</string>
+    <string name="cardsColorJoker">Joker</string>
+    <string name="emptyDeck">Le deck est vide! Votre magie est épuisée</string>
 </resources>
