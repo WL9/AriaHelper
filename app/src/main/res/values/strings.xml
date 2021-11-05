@@ -18,4 +18,17 @@
     <string name="resetDeck">Réinitialiser</string>
     <string name="remainingCards">Cartes restantes dans le deck</string>
     <string name="removeCards">Retirer carte(s)</string>
+    <string name="cardValue0">2</string>
+    <string name="cardValue1">3</string>
+    <string name="cardValue2">4</string>
+    <string name="cardValue3">5</string>
+    <string name="cardValue4">6</string>
+    <string name="cardValue5">7</string>
+    <string name="cardValue6">8</string>
+    <string name="cardValue7">9</string>
+    <string name="cardValue8">10</string>
+    <string name="cardValue9">Valet</string>
+    <string name="cardValue10">Dame</string>
+    <string name="cardValue11">Roi</string>
+    <string name="cardValue12">As</string>
 </resources>

@@ -39,7 +39,6 @@ class CardsFragment : Fragment() {
     }
 
     private fun setClickListeners() {
-        //TODO : rework à faire : définir les fonctions plutot qu'une fonction de set globale
         cardResultDisplay.setOnClickListener {
             if (cards.getDeckSize() > 0) {
                 drawCard()
@@ -63,15 +62,14 @@ class CardsFragment : Fragment() {
 
     private fun drawCard() {
         val cardResult = cards.draw()
-        val cardValue = cards.getCardValue(cardResult)
-        val cardText = cardValue[0].toString() + " " + getString(cardValue[1])
-        displayNewCard(cardText)
+        displayNewCard(cardResult)
     }
 
-    private fun displayNewCard(card: String) {
-        //TODO : cette fonction sera à modifier pour adapter l'affichage des cartes
-        //et non plus un simple texte
-        cardResultDisplay.text = card
+    private fun displayNewCard(card: Int) {
+        //TODO : cette fonction sera à modifier pour adapter l'affichage des images de cartes et non plus un simple texte
+        val cardValue = cards.getCardValue(card)
+        val cardText = getString(cardValue[0]) + " " + getString(cardValue[1])
+        cardResultDisplay.text = cardText
     }
 
     private fun triggerEmptyDeck() {
@@ -112,7 +110,21 @@ class CardsFragment : Fragment() {
     }
 
     private fun chooseCardValue(color: Int) {
-        val valuesList = arrayOf("2","3","4","5","6","7","8","9","10", "valet", "dame", "roi", "as")
+        val valuesList = arrayOf(
+            resources.getString(R.string.cardValue0),
+            resources.getString(R.string.cardValue1),
+            resources.getString(R.string.cardValue2),
+            resources.getString(R.string.cardValue3),
+            resources.getString(R.string.cardValue4),
+            resources.getString(R.string.cardValue5),
+            resources.getString(R.string.cardValue6),
+            resources.getString(R.string.cardValue7),
+            resources.getString(R.string.cardValue8),
+            resources.getString(R.string.cardValue9),
+            resources.getString(R.string.cardValue10),
+            resources.getString(R.string.cardValue11),
+            resources.getString(R.string.cardValue12)
+        )
         var checkedItem = 0
 
         context?.let {
@@ -135,19 +147,6 @@ class CardsFragment : Fragment() {
         cards.addCard(newCard)
     }
 
-    private fun resetDeck() {
-        context?.let {
-            MaterialAlertDialogBuilder(it)
-                .setMessage(R.string.confirmResetDeck)
-                .setNegativeButton(R.string.cancel) { _, _ ->
-                }
-                .setPositiveButton(R.string.resetDeck) { _, _ ->
-                    cards.resetDeck()
-                }
-                .show()
-        }
-    }
-
     private fun removeRemainingCards() {
         val remainingCards:Array<CharSequence> = getRemainingCards()
         val selectedList = BooleanArray(cards.getDeckSize()) {false}
@@ -163,10 +162,10 @@ class CardsFragment : Fragment() {
                         cards.removeCard(card)
                 }
                 .setMultiChoiceItems(remainingCards, selectedList) { _, which, isChecked ->
+                    val card = cards.getCardAtPosition(which)
                     when{
-                        isChecked -> cardsToRemove.add(cards.cards[which])
+                        isChecked -> cardsToRemove.add(card)
                         cardsToRemove.contains(which) -> cardsToRemove.remove(which)
-                        else -> false
                     }
                 }
                 .show()
@@ -174,12 +173,27 @@ class CardsFragment : Fragment() {
     }
 
     private fun getRemainingCards(): Array<CharSequence> {
-        val cardsList = ArrayList<CharSequence>()
-        for(card in cards.cards) {
-            val cardValue = cards.getCardValue(card)
-            val cardText = cardValue[0].toString() + " " + getString(cardValue[1])
-            cardsList.add(cardText)
+        val remainingCardsArray = cards.getRemainingCards()
+        val remainingCardsText = ArrayList<CharSequence>()
+        for(card in remainingCardsArray) {
+            if(card[1] == R.string.cardsColorJoker)
+                remainingCardsText.add(getString(card[1]))
+            else
+                remainingCardsText.add(getString(card[0]) + " " + getString(card[1]))
         }
-        return cardsList.toTypedArray()
+        return remainingCardsText.toTypedArray()
+    }
+
+    private fun resetDeck() {
+        context?.let {
+            MaterialAlertDialogBuilder(it)
+                .setMessage(R.string.confirmResetDeck)
+                .setNegativeButton(R.string.cancel) { _, _ ->
+                }
+                .setPositiveButton(R.string.resetDeck) { _, _ ->
+                    cards.resetDeck()
+                }
+                .show()
+        }
     }
 }
