@@ -4,7 +4,7 @@ import com.k.ariahelper.R
 import kotlin.random.Random
 
 class Cards(_cards: ArrayList<Int> = arrayListOf()) {
-    private val deckSize: Int = 53
+    private val deckSize: Int = 52
     private val colorSize: Int = 13
     private var cardsColors = arrayOf(
         R.string.cardsColorSpades,
@@ -14,7 +14,7 @@ class Cards(_cards: ArrayList<Int> = arrayListOf()) {
         R.string.cardsColorJoker
     )
 
-    private var cards = _cards
+    var cards = _cards
 
     init {
         if(cards.size == 0)
@@ -39,10 +39,10 @@ class Cards(_cards: ArrayList<Int> = arrayListOf()) {
         cards.sort()
     }
 
-    fun getCardValue(id: Int): String {
+    fun getCardValue(id: Int): Array<Int> {
         val cardTypeIndex: Int = id / colorSize
         val cardValue: Int = id - colorSize * cardTypeIndex
-        return cardValue.toString() + " " + cardsColors[cardTypeIndex]
+        return arrayOf(cardValue, cardsColors[cardTypeIndex])
     }
 
     fun removeCard(value: Int) {

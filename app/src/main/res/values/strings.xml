@@ -9,4 +9,13 @@
     <string name="cardsColorClubs">trèfle</string>
     <string name="cardsColorJoker">Joker</string>
     <string name="emptyDeck">Le deck est vide! Votre magie est épuisée</string>
+    <string name="newCardColor">Couleur de carte à ajouter</string>
+    <string name="newCardValue">Valeur de carte à ajouter</string>
+    <string name="cancel">Annuler</string>
+    <string name="select">Sélectionner</string>
+    <string name="addCard">Ajouter carte</string>
+    <string name="confirmResetDeck">Etes-vous sûr de vouloir réinitialiser le deck ?</string>
+    <string name="resetDeck">Réinitialiser</string>
+    <string name="remainingCards">Cartes restantes dans le deck</string>
+    <string name="removeCards">Retirer carte(s)</string>
 </resources>
