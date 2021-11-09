@@ -1,5 +1,6 @@
 package com.k.ariahelper.controllers.cards
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,14 +12,24 @@ import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.k.ariahelper.R
 import com.k.ariahelper.models.Cards
+import kotlin.collections.ArrayList
 
 class CardsFragment : Fragment() {
-    private var cards = Cards()
-
+    private lateinit var cards: Cards
     private lateinit var cardResultDisplay: TextView
     private lateinit var addCardButton: Button
     private lateinit var remainingCardsButton: Button
     private lateinit var resetDeckButton: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val previousDeck = readDeckState()
+        cards = if(previousDeck.size > 0)
+            Cards(previousDeck)
+        else
+            Cards()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +74,7 @@ class CardsFragment : Fragment() {
     private fun drawCard() {
         val cardResult = cards.draw()
         displayNewCard(cardResult)
+        writeDeckState()
     }
 
     private fun displayNewCard(card: Int) {
@@ -145,6 +157,7 @@ class CardsFragment : Fragment() {
     private fun addNewCard(color: Int = 0, value: Int = 0) {
         val newCard = color * 13 + value
         cards.addCard(newCard)
+        writeDeckState()
     }
 
     private fun removeRemainingCards() {
@@ -160,6 +173,7 @@ class CardsFragment : Fragment() {
                 .setPositiveButton(R.string.removeCards) { _, _ ->
                     for(card in cardsToRemove)
                         cards.removeCard(card)
+                    writeDeckState()
                 }
                 .setMultiChoiceItems(remainingCards, selectedList) { _, which, isChecked ->
                     val card = cards.getCardAtPosition(which)
@@ -194,6 +208,34 @@ class CardsFragment : Fragment() {
                     cards.resetDeck()
                 }
                 .show()
+            writeDeckState()
         }
+    }
+
+    private fun writeDeckState() {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val deckState: String = cards.getDeckToSave()
+
+        with (sharedPref.edit()) {
+            putString(getString(R.string.deckSaveKey), deckState)
+            apply()
+        }
+    }
+
+    private fun readDeckState(): ArrayList<Int> {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val dataRead: String? = sharedPref?.getString(getString(R.string.deckSaveKey), "")
+        val dataTokens = dataRead!!.split(",")
+        var deck: ArrayList<Int> = arrayListOf()
+
+        try {
+            for (token in dataTokens)
+                deck.add(Integer.parseInt(token))
+        }
+        catch(exception: NumberFormatException) {
+            deck = arrayListOf()
+        }
+
+        return deck
     }
 }

@@ -31,4 +31,5 @@
     <string name="cardValue10">Dame</string>
     <string name="cardValue11">Roi</string>
     <string name="cardValue12">As</string>
+    <string name="deckSaveKey">deckState</string>
 </resources>

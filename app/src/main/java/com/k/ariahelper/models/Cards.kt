@@ -81,4 +81,11 @@ class Cards(_cards: ArrayList<Int> = arrayListOf()) {
     fun getCardAtPosition(position: Int): Int {
         return cards[position]
     }
+
+    fun getDeckToSave(): String {
+        var deckText = ""
+        for(i in cards)
+            deckText += "$i,"
+        return deckText
+    }
 }
