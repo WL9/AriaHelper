@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="card_colors">
+        <item>@string/cardsColorSpades</item>
+        <item>@string/cardsColorDiamonds</item>
+        <item>@string/cardsColorClubs</item>
+        <item>@string/cardsColorHearts</item>
+        <item>@string/cardsColorJoker</item>
+    </string-array>
+
+    <string-array name="card_values">
+        <item>@string/cardValue0</item>
+        <item>@string/cardValue1</item>
+        <item>@string/cardValue2</item>
+        <item>@string/cardValue3</item>
+        <item>@string/cardValue4</item>
+        <item>@string/cardValue5</item>
+        <item>@string/cardValue6</item>
+        <item>@string/cardValue7</item>
+        <item>@string/cardValue8</item>
+        <item>@string/cardValue9</item>
+        <item>@string/cardValue10</item>
+        <item>@string/cardValue11</item>
+        <item>@string/cardValue12</item>
+    </string-array>
+
+    <array name="cards_list">
+        <item>@drawable/card2</item>
+        <item>@drawable/card3</item>
+        <item>@drawable/card4</item>
+        <item>@drawable/card5</item>
+        <item>@drawable/card6</item>
+        <item>@drawable/card7</item>
+        <item>@drawable/card8</item>
+        <item>@drawable/card9</item>
+        <item>@drawable/card10</item>
+        <item>@drawable/card11</item>
+        <item>@drawable/card12</item>
+        <item>@drawable/card13</item>
+        <item>@drawable/card1</item>
+
+        <item>@drawable/card15</item>
+        <item>@drawable/card16</item>
+        <item>@drawable/card17</item>
+        <item>@drawable/card18</item>
+        <item>@drawable/card19</item>
+        <item>@drawable/card20</item>
+        <item>@drawable/card21</item>
+        <item>@drawable/card22</item>
+        <item>@drawable/card23</item>
+        <item>@drawable/card24</item>
+        <item>@drawable/card25</item>
+        <item>@drawable/card26</item>
+        <item>@drawable/card14</item>
+
+        <item>@drawable/card28</item>
+        <item>@drawable/card29</item>
+        <item>@drawable/card30</item>
+        <item>@drawable/card31</item>
+        <item>@drawable/card32</item>
+        <item>@drawable/card33</item>
+        <item>@drawable/card34</item>
+        <item>@drawable/card35</item>
+        <item>@drawable/card36</item>
+        <item>@drawable/card37</item>
+        <item>@drawable/card38</item>
+        <item>@drawable/card39</item>
+        <item>@drawable/card27</item>
+
+        <item>@drawable/card41</item>
+        <item>@drawable/card42</item>
+        <item>@drawable/card43</item>
+        <item>@drawable/card44</item>
+        <item>@drawable/card45</item>
+        <item>@drawable/card46</item>
+        <item>@drawable/card47</item>
+        <item>@drawable/card48</item>
+        <item>@drawable/card49</item>
+        <item>@drawable/card50</item>
+        <item>@drawable/card51</item>
+        <item>@drawable/card52</item>
+        <item>@drawable/card40</item>
+    </array>
+</resources>

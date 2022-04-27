@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.k.ariahelper.R
 import com.k.ariahelper.models.Cards
@@ -16,7 +18,7 @@ import kotlin.collections.ArrayList
 
 class CardsFragment : Fragment() {
     private lateinit var cards: Cards
-    private lateinit var cardResultDisplay: TextView
+    private lateinit var cardImage: ImageView
     private lateinit var addCardButton: Button
     private lateinit var remainingCardsButton: Button
     private lateinit var resetDeckButton: Button
@@ -32,7 +34,8 @@ class CardsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_cards, container, false)
@@ -41,7 +44,7 @@ class CardsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cardResultDisplay = view.findViewById(R.id.testingCard)
+        cardImage = view.findViewById(R.id.imageView)
         addCardButton = view.findViewById(R.id.addCard)
         remainingCardsButton = view.findViewById(R.id.remainingCards)
         resetDeckButton = view.findViewById(R.id.resetDeck)
@@ -50,7 +53,7 @@ class CardsFragment : Fragment() {
     }
 
     private fun setClickListeners() {
-        cardResultDisplay.setOnClickListener {
+        cardImage.setOnClickListener {
             if (cards.getDeckSize() > 0) {
                 drawCard()
             } else {
@@ -78,10 +81,11 @@ class CardsFragment : Fragment() {
     }
 
     private fun displayNewCard(card: Int) {
-        //TODO : cette fonction sera à modifier pour adapter l'affichage des images de cartes et non plus un simple texte
-        val cardValue = cards.getCardValue(card)
-        val cardText = getString(cardValue[0]) + " " + getString(cardValue[1])
-        cardResultDisplay.text = cardText
+        val cardsImageArray = resources.obtainTypedArray(R.array.cards_list)
+        val cardToDisplay = cardsImageArray.getDrawable(card)
+
+        cardImage.setImageDrawable(cardToDisplay)
+        cardsImageArray.recycle()
     }
 
     private fun triggerEmptyDeck() {
@@ -93,13 +97,7 @@ class CardsFragment : Fragment() {
     }
 
     private fun chooseCardColor() {
-        val colorsList = arrayOf(
-            resources.getString(R.string.cardsColorSpades),
-            resources.getString(R.string.cardsColorDiamonds),
-            resources.getString(R.string.cardsColorClubs),
-            resources.getString(R.string.cardsColorHearts),
-            resources.getString(R.string.cardsColorJoker)
-        )
+        val colorsList = resources.getStringArray(R.array.card_colors)
         var checkedItem = 0
 
         context?.let {
@@ -122,21 +120,7 @@ class CardsFragment : Fragment() {
     }
 
     private fun chooseCardValue(color: Int) {
-        val valuesList = arrayOf(
-            resources.getString(R.string.cardValue0),
-            resources.getString(R.string.cardValue1),
-            resources.getString(R.string.cardValue2),
-            resources.getString(R.string.cardValue3),
-            resources.getString(R.string.cardValue4),
-            resources.getString(R.string.cardValue5),
-            resources.getString(R.string.cardValue6),
-            resources.getString(R.string.cardValue7),
-            resources.getString(R.string.cardValue8),
-            resources.getString(R.string.cardValue9),
-            resources.getString(R.string.cardValue10),
-            resources.getString(R.string.cardValue11),
-            resources.getString(R.string.cardValue12)
-        )
+        val valuesList = resources.getStringArray(R.array.card_values)
         var checkedItem = 0
 
         context?.let {
@@ -206,10 +190,17 @@ class CardsFragment : Fragment() {
                 }
                 .setPositiveButton(R.string.resetDeck) { _, _ ->
                     cards.resetDeck()
+                    resetCardView()
                 }
                 .show()
             writeDeckState()
         }
+    }
+
+    private fun resetCardView() {
+        val backCardId = R.drawable.card0
+        val backCardImage = ResourcesCompat.getDrawable(resources, backCardId, null)
+        cardImage.setImageDrawable(backCardImage)
     }
 
     private fun writeDeckState() {

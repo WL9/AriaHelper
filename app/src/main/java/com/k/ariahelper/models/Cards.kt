@@ -54,12 +54,6 @@ class Cards(_cards: ArrayList<Int> = arrayListOf()) {
         cards.sort()
     }
 
-    fun getCardValue(id: Int): Array<Int> {
-        val cardTypeIndex: Int = id / colorSize
-        val cardValue: Int = id - colorSize * cardTypeIndex
-        return arrayOf(cardsValues[cardValue], cardsColors[cardTypeIndex])
-    }
-
     fun removeCard(value: Int) {
         cards.remove(value)
     }
@@ -71,6 +65,12 @@ class Cards(_cards: ArrayList<Int> = arrayListOf()) {
             cardsList.add(cardValue)
         }
         return cardsList
+    }
+
+    private fun getCardValue(id: Int): Array<Int> {
+        val cardTypeIndex: Int = id / colorSize
+        val cardValue: Int = id - colorSize * cardTypeIndex
+        return arrayOf(cardsValues[cardValue], cardsColors[cardTypeIndex])
     }
 
     fun resetDeck() {
